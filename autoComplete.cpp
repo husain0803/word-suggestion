@@ -53,84 +53,84 @@ bool search(trienode* root,string key)
     
 }
 
-trienode* helper(trienode* root,string key,int ind)
-{   // if tree is empty
-    if(root==NULL) return NULL;
+// trienode* helper(trienode* root,string key,int ind)    //not used here
+// {   // if tree is empty
+//     if(root==NULL) return NULL;
     
-    /*
-        helper function takes 3 parameters
-        1) root of subtrie (or subtree)
-        2) processing key (key which is going to be deleted)
-        3) ind (index) -> which character is processing or how much depth
+//     /*
+//         helper function takes 3 parameters
+//         1) root of subtrie (or subtree)
+//         2) processing key (key which is going to be deleted)
+//         3) ind (index) -> which character is processing or how much depth
         
-        it returns root of this subtrie
-    */
+//         it returns root of this subtrie
+//     */
     
-    bool isempty = true;
-    for(int i=0;i<26;i++)
-    {
-        if(root->child[i] != NULL)
-        {
-            isempty = false;
-            break;
-        }
-    }
+//     bool isempty = true;
+//     for(int i=0;i<26;i++)
+//     {
+//         if(root->child[i] != NULL)
+//         {
+//             isempty = false;
+//             break;
+//         }
+//     }
     
-    if(ind == key.length())
-    {
-        /* hit the end of key
+//     if(ind == key.length())
+//     {
+//         /* hit the end of key
         
-         possibilty -> 1) this key is prefix of other key, 
-         int this case,set is_word of current root equals to false;
+//          possibilty -> 1) this key is prefix of other key, 
+//          int this case,set is_word of current root equals to false;
         
-         possibilty ->2) this key is not prefix of any other key
-         in this case delete this node;
-        */
-        if(isempty==false)
-        {
-            // case 1
-            root->is_word = false;
+//          possibilty ->2) this key is not prefix of any other key
+//          in this case delete this node;
+//         */
+//         if(isempty==false)
+//         {
+//             // case 1
+//             root->is_word = false;
             
-        }
-        else
-        {
-            //case 2
-            delete(root);
-            root = NULL;
-        }
+//         }
+//         else
+//         {
+//             //case 2
+//             delete(root);
+//             root = NULL;
+//         }
         
-        return root;
+//         return root;
         
-    }
-    int pos = int(key[ind])-'a';
-    root->child[pos] = helper(root->child[pos],key,ind+1);
+//     }
+//     int pos = int(key[ind])-'a';
+//     root->child[pos] = helper(root->child[pos],key,ind+1);
     
-    isempty = true;
-    for(int i=0;i<26;i++)
-    {
-        if(root->child[i] != NULL)
-        {
-            isempty = false;
-            break;
-        }
-    }
+//     isempty = true;
+//     for(int i=0;i<26;i++)
+//     {
+//         if(root->child[i] != NULL)
+//         {
+//             isempty = false;
+//             break;
+//         }
+//     }
     
-    /* here we have two case
-     1) if all  child nodes of root is empty and this root is not marked as 
-        of word then delete this node 
+//     /* here we have two case
+//      1) if all  child nodes of root is empty and this root is not marked as 
+//         of word then delete this node 
     
-     2) if all child nodes are not empty "OR" this root os marked as end of 
-        word then do nothing
-    */
+//      2) if all child nodes are not empty "OR" this root os marked as end of 
+//         word then do nothing
+//     */
     
-    if( isempty && root->is_word == false )
-    {
-        delete(root);
-        root = NULL;
-    }
+//     if( isempty && root->is_word == false )
+//     {
+//         delete(root);
+//         root = NULL;
+//     }
     
-    return root;
-}
+//     return root;
+// }
 
 
 trienode* delete_key(trienode* root , string key)
